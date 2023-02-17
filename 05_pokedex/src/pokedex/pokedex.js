@@ -1,9 +1,11 @@
-import Pokemon, {getAllPokemon} from '../pokemon/pokemon';
+import Pokemon from '../pokemon/pokemon';
 import './pokedex.css';
+import Helper from '../services/helper';
+
+let hp = new Helper;
 
 function Pokedex(){
-    const pokemons = getAllPokemon();
-
+    var pokemons = hp.getAllPokemon();
     var cards = pokemons.map((pokemon) => (
         <Pokemon 
             key={pokemon.id}
@@ -17,7 +19,7 @@ function Pokedex(){
     return(
         <div className="Pokedex container">
             <div className="Pokedex-header row"><h2>Pokedex</h2></div>
-            <div className="row">
+            <div className="row justify-content-around">
                 {cards}
             </div>
         </div>
