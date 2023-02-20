@@ -1,0 +1,14 @@
+.RollingDice > .Dices{
+    display: flex;
+    justify-content: center;
+}
+.RollingDice button{
+    background-color: pink;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.RollingDice button:disabled{
+    color: red;
+}

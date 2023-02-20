@@ -1,0 +1,20 @@
+.Dice{
+    background-color: white;
+    border-radius: 10px;
+    font-size: 100px;
+    color: pink;
+    margin: 10px;
+}
+.Dice.Rolling{
+    transition: ease;;
+    animation-name: example;
+    animation-duration: 1s;
+}
+
+@keyframes example {
+    0%   {transform: rotate(0deg);}
+    25%  {transform: rotate(-20deg);}
+    50%  {transform: rotate(20deg);}
+    100% {transform: rotate(0deg);}
+  }
+  
