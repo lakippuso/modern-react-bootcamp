@@ -4,8 +4,8 @@ import './RollingDice.css';
 
 class RollingDice extends Component {
     state = {
-        dice1: 1,
-        dice2: 1,
+        dice1: 0,
+        dice2: 0,
         isDiceRolling: false
     }
 
