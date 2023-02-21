@@ -20,7 +20,9 @@ class Box extends Component {
             backgroundColor: this.state.backgroundColor,
         }
         return (
-            <div className="Box" style={style} onClick={this.changeColor}>
+            <div 
+                className="Box" style={style} 
+                onClick={this.changeColor}>
                 {style.backgroundColor}
             </div>
           );

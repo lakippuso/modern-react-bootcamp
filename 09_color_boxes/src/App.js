@@ -4,7 +4,7 @@ import ColorBox from './ColorBox/ColorBox';
 function App() {
   return (
     <div className="App">
-      <ColorBox/>
+      <ColorBox numBox={16}/>
     </div>
   );
 }
