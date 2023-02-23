@@ -1,0 +1,14 @@
+.TodoList{
+    background-color: pink;
+    min-height: 10em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 0;
+    margin: 0 20%;
+}
+.TodoList ul{
+    list-style: none;
+}
