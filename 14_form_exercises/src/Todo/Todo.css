@@ -1,0 +1,27 @@
+.Todo{
+    border: 1px solid white;
+    padding: 5%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+}
+.Todo .text{
+    flex-grow: 2;
+    margin-right: 10px;
+}
+.Todo .buttons{
+    flex-shrink: 1;
+}
+.Todo input{
+    font-size: 24px;
+    width: 100%;
+    height: 90%;
+}
+button{
+    width: 50px;
+    height: 50px;
+}
+.done{
+    text-decoration: line-through;
+    color: grey;
+}

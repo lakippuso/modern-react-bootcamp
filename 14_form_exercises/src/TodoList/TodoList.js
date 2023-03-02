@@ -42,7 +42,7 @@ class TodoList extends Component {
                 <div className="TodoList-header">
                     <h1>TodoList</h1>
                 </div>
-                <ul>
+                <ul className='Todos'>
                     {this.state.todos.map( t => 
                         <Todo key={t.id} 
                             title={t.title} 
