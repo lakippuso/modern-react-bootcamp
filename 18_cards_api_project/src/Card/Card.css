@@ -1,0 +1,10 @@
+.Card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Card img{
+    display: inline;
+    position: absolute;
+    top: 50%;
+}
