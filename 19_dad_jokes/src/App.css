@@ -1,0 +1,12 @@
+.App{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  background: hsla(300, 100%, 64%, 1);
+  background: linear-gradient(135deg, hsla(300, 100%, 64%, 1) 13%, hsla(49, 100%, 69%, 1) 82%);
+  background: -moz-linear-gradient(135deg, hsla(300, 100%, 64%, 1) 13%, hsla(49, 100%, 69%, 1) 82%);
+  background: -webkit-linear-gradient(135deg, hsla(300, 100%, 64%, 1) 13%, hsla(49, 100%, 69%, 1) 82%);
+}

@@ -11,10 +11,10 @@ class Deck extends Component {
         isDrawing: false,
         cards: [],
     }
-    constructor(props){
-        super(props);
-        this.draw = this.draw.bind(this);
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.draw = this.draw.bind(this);
+    // }
     async componentDidMount(){
         const url = "https://deckofcardsapi.com/api/deck/new/shuffle";
         let response = await axios.get(url);
