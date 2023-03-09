@@ -1,0 +1,13 @@
+.Soda{
+    margin: auto;
+    width: 50%;
+}
+.Soda-form{
+    background-color: rgba(0, 0, 0, .1);
+}
+.Soda img{
+    height: 150px;
+    width: 100px;
+    position: absolute;
+    z-index: -99;
+}
