@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import './Fish.css';
+import FormContainer from '../FormContainer/FormContainer';
 class Fish extends Component {
     state = {
         fish: [],
@@ -20,9 +21,11 @@ class Fish extends Component {
         console.log("Component Render!");
         return (
             <div className="Fish">
-                <h1>Fish</h1>
-                <button onClick={this.addFish}>Add Fish</button>
-                <Link to='/'> Go back</Link>
+                <FormContainer>
+                    <h1>Fish</h1>
+                    <button onClick={this.addFish}>Add Fish</button>
+                    <Link to='/'> Go back</Link>
+                </FormContainer>
                 { this.state.fish.map( c => <img style={{top: `${c.y}vh`, left: `${c.x}vw`}} src='https://cdn3.iconfinder.com/data/icons/korean-street-food/100/Fish_Bread-512.png' alt={`Fish`} /> )}
             </div>
           );

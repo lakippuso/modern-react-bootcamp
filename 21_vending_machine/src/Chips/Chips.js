@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { Form } from 'react-router-dom';
+import FormContainer from '../FormContainer/FormContainer';
 import './Chips.css';
 class Chips extends Component {
     state = {
@@ -19,8 +21,10 @@ class Chips extends Component {
         console.log("Component Render!");
         return (
             <div className="Chips">
-                <h1>Chips</h1>
-                <button onClick={this.addChips}>Add Chips</button>
+                <FormContainer>
+                    <h1>Chips</h1>
+                    <button onClick={this.addChips}>Add Chips</button>
+                </FormContainer>
                 { this.state.chips.map( c => <img style={{top: `${c.y}vh`, left: `${c.x}vw`}} src='https://www.oishi.com.ph/wp-content/uploads/2017/04/potatochips-Plain-Salted-copy.png' alt='Chips'/> )}
             </div>
           );
