@@ -1,0 +1,15 @@
+.DogFinder-content{
+    display: flex;
+    justify-content: space-evenly;
+}
+.DogFinder-content .dog-link{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+}
+.DogFinder-content img{
+    border-radius: 50%;
+    width: 400px;
+    
+}
