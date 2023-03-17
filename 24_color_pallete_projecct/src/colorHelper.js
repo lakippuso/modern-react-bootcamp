@@ -1,4 +1,4 @@
-import chroma, { hex } from 'chroma-js';
+import chroma from 'chroma-js';
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 function generatePalette(starterPalette) {
@@ -18,7 +18,8 @@ function generatePalette(starterPalette) {
                 name: `${color.name} ${levels[i]}`,
                 id: color.name.toLowerCase().replace(/ /g,"-"),
                 hex: scale[i],
-                rgb: chroma(scale[i]).css()
+                rgb: chroma(scale[i]).css(),
+                rgba: chroma(scale[i]).css().replace(')', ', 1.0)')
             });
         }
     }

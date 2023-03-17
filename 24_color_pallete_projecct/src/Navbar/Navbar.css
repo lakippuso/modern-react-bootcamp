@@ -1,0 +1,8 @@
+.Navbar{
+    display: flex;
+}
+.Navbar-brand, .Navbar-slider{
+    padding: 10px;
+}
+.Navbar-slider{
+}
