@@ -1,8 +1,19 @@
 .Navbar{
     display: flex;
-}
-.Navbar-brand, .Navbar-slider{
     padding: 10px;
 }
+.Navbar-brand{
+    text-align: center;
+    text-transform: uppercase;
+    align-self: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+.Navbar-control{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 .Navbar-slider{
+    width: 20rem;
 }

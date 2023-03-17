@@ -1,31 +1,87 @@
 import React, {Component} from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
+import Snackbar from '@mui/material/Snackbar';
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from '@mui/material';
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 import './Navbar.css';
 class Navbar extends Component {
+    state = {
+        open: false
+    };
+
+    handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      this.setState({ open: false});
+    };
+  
+    action = (
+        <IconButton
+          size="small"
+          aria-label="close"
+          color="inherit"
+          onClick={this.handleClose}
+        >
+          <CloseIcon fontSize="small" />
+        </IconButton>
+    );
+    handleChangeChroma = evt =>{
+        this.props.changeChroma(evt.target.value);
+    }
+    handleChangeFormat = evt =>{
+        this.props.changeFormat(evt.target.value);
+        this.setState({ open: true}, () =>{
+            setTimeout(() => {
+                this.setState({ open: false});
+            }, 1000);
+        });
+
+    }
     render(){
-        const { level, changeChroma, changeFormat, colorFormat } = this.props;
+        const { level, colorFormat } = this.props;
         return (
             <div className="Navbar">
                 <div className="Navbar-brand"><span>React Color Picker</span></div>
-                
-                <div className="Navbar-slider">
-                    <span>Level: {level} </span>
-                    <input type="range" min="1" max="9" onChange={changeChroma}/>
+                <div className="Navbar-control">
+                    <div className="Navbar-slider">
+                        
+                        <Typography id="input-slider" gutterBottom>
+                            Level: {level}
+                        </Typography>
+                        <Slider aria-labelledby="input-slider"
+                                onChange={this.handleChangeChroma} 
+                                defaultValue={5} 
+                                marks
+                                min={1}
+                                max={9}
+                        />
+                    </div>
+                    <div className="Navbar-format">
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={colorFormat}
+                        onChange={this.handleChangeFormat}
+                        >
+                            <MenuItem value="hex">HEX - #1234EF</MenuItem>
+                            <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
+                            <MenuItem value="rgba">RGBA - rgba(255,255,255,1)</MenuItem>
+                        </Select>
+                        
+                    </div>
                 </div>
-                <div className="Navbar-format">
-                    <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={colorFormat}
-                    onChange={changeFormat}
-                    >
-                        <MenuItem value="hex">HEX - #1234EF</MenuItem>
-                        <MenuItem value="rgb">RGB - rbg(255,255,255)</MenuItem>
-                        <MenuItem value="rgba">RGBA - rbga(255,255,255,1)</MenuItem>
-                    </Select>
-                </div>
+
+                <Snackbar
+                    autoHideDuration={3000}
+                    anchorOrigin={{horizontal: "left", vertical: 'bottom'}}
+                    open={this.state.open}
+                    message={`Format changed to ${colorFormat}`}
+                    action={this.action}
+                />
             </div>
           );
     }

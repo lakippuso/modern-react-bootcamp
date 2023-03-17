@@ -10,12 +10,12 @@ class Palette extends Component {
         level: '600',
         colorFormat: 'hex'
     }
-    changeChroma = evt =>{
-        this.setState({level: levels[evt.target.value]})
+    changeChroma = value =>{
+        this.setState({level: levels[value]})
     }
-    changeFormat = evt =>{
-        console.log(evt.target.value);
-        this.setState({ colorFormat: evt.target.value });
+    changeFormat = (value) =>{
+        console.log(value);
+        this.setState({ colorFormat: value });
     }
     render(){
         let boxes = this.props.palette
@@ -25,9 +25,10 @@ class Palette extends Component {
         return (
             <div className="Palette">
                 <Navbar level={this.state.level} 
-                changeChroma={this.changeChroma} 
-                changeFormat={this.changeFormat} 
-                colorFormat={this.state.colorFormat}/>
+                        changeChroma={this.changeChroma} 
+                        changeFormat={this.changeFormat} 
+                        colorFormat={this.state.colorFormat}
+                />
                 <div className="Palette-colors">    
                     {boxes}
                 </div>
