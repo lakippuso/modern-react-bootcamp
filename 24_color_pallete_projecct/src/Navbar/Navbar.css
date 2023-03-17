@@ -6,7 +6,7 @@
     text-align: center;
     text-transform: uppercase;
     align-self: center;
-    color: rgba(0, 0, 0, 0.5);
+    /* color: rgba(0, 0, 0, 0.5); */
 }
 .Navbar-control{
     display: flex;
@@ -15,5 +15,6 @@
     width: 100%;
 }
 .Navbar-slider{
+    display: flex;
     width: 20rem;
 }

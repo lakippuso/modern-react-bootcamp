@@ -1,40 +1,46 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import ColorBox from '../ColorBox/ColorBox';
+import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
+import seedColors from '../seedColors';
+import generatePalette from '../colorHelper';
+import { useParams } from 'react-router-dom';
 import './Palette.css';
 
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-class Palette extends Component {
-    state = {
-        level: '600',
-        colorFormat: 'hex'
+function Palette(props){
+    const [ level, setLevel ] = useState('600');
+    const [ colorFormat, setColorFormat ] = useState('hex');
+    // state = {
+    //     level: '600',
+    //     colorFormat: 'hex'
+    // }
+    const changeChroma = value =>{
+        setLevel(levels[value])
     }
-    changeChroma = value =>{
-        this.setState({level: levels[value]})
+    const changeFormat = (value) =>{
+        setColorFormat(value);
     }
-    changeFormat = (value) =>{
-        console.log(value);
-        this.setState({ colorFormat: value });
-    }
-    render(){
-        let boxes = this.props.palette
-        .colors[this.state.level].map( 
-            c => (<ColorBox name={c.name} color={c[this.state.colorFormat]} />)
-        );
-        return (
-            <div className="Palette">
-                <Navbar level={this.state.level} 
-                        changeChroma={this.changeChroma} 
-                        changeFormat={this.changeFormat} 
-                        colorFormat={this.state.colorFormat}
-                />
-                <div className="Palette-colors">    
-                    {boxes}
-                </div>
+    const param = useParams();
+    let palette = generatePalette(seedColors[param.paletteId]);
+    let boxes = palette
+    .colors[level].map( 
+        c => (<ColorBox name={c.name} color={c[colorFormat]} />)
+    );
+    return (
+        <div className="Palette">
+            <Navbar level={level} 
+                    changeChroma={changeChroma} 
+                    changeFormat={changeFormat} 
+                    colorFormat={colorFormat}
+            />
+            <div className="Palette-colors">    
+                {boxes}
             </div>
-          );
-    }
+            <Footer paletteName={palette.paletteName} paletteIcon={palette.emoji}/>
+        </div>
+    );
 }
 
 export default Palette;
