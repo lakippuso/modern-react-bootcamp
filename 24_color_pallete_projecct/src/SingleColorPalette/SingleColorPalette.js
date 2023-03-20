@@ -4,8 +4,9 @@ import seedColors from "../seedColors";
 import generatePalette, { generateScale, levels } from '../colorHelper';
 import ColorBox from "../ColorBox/ColorBox";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+
 import { useState } from "react";
-import { color } from "@mui/system";
 
 export default function SingleColorPalette(props) {
     //States
@@ -59,6 +60,8 @@ export default function SingleColorPalette(props) {
             <div className="SingleColorPalette-colors">
                 {boxes.slice(1)}
             </div>
+            
+            <Footer paletteName={palette.paletteName} paletteIcon={palette.emoji}/>
         </Box>
     );
 }
@@ -68,6 +71,7 @@ function getPalette( paletteId ) {
         if (palette.id === paletteId) return palette;
     });
 }
+//Generate new Palette
 function generateNewPalette( palette, colorId ){
     let shades = [];
     let allColors = generatePalette(palette).colors;
