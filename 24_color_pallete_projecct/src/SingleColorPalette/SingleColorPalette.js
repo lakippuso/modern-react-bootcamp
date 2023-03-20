@@ -5,10 +5,10 @@ import generatePalette, { generateScale, levels } from '../colorHelper';
 import ColorBox from "../ColorBox/ColorBox";
 import Navbar from "../Navbar/Navbar";
 import { useState } from "react";
+import { color } from "@mui/system";
 
 export default function SingleColorPalette(props) {
     //States
-    const [ level, setLevel ] = useState('600');
     const [ colorFormat, setColorFormat ] = useState('hex');
 
     const showSlider = false;
@@ -32,19 +32,30 @@ export default function SingleColorPalette(props) {
     }
     let { paletteId, colorId } = useParams();
     let palette = getPalette( paletteId );
+    let newPalette = generateNewPalette(palette, colorId);
 
     // Find color name from paramId
-    let color = palette.colors.find( color => {
-        return color.name.toLowerCase() === colorId;
-    });
-    // console.log(color)
+    // let color = palette.colors.find( color => {
+    //     return color.name.toLowerCase() === colorId;
+    // });
     // Generate scale of color
-    let scale = generateScale(color.color, 10).reverse();
+    // let scale = generateScale(color.color, 10).reverse();
 
-    let boxes = scale.map( (c, i) => <ColorBox name={`${color.name} ${levels[i]}`} color={c} showLink={false}/>)
+    let boxes = newPalette.map( (c, i) => 
+        <ColorBox 
+            key={i} 
+            name={c.name} 
+            color={c[colorFormat]}
+            showLink={false}
+        />
+    )
     return (
         <Box sx={style} className="SingleColorPalette">
-            <Navbar showSlider={showSlider} />
+            <Navbar 
+                showSlider={showSlider} 
+                changeFormat={changeFormat} 
+                colorFormat={colorFormat}
+            />
             <div className="SingleColorPalette-colors">
                 {boxes.slice(1)}
             </div>
@@ -56,4 +67,14 @@ function getPalette( paletteId ) {
     return seedColors.find( function(palette) {
         if (palette.id === paletteId) return palette;
     });
+}
+function generateNewPalette( palette, colorId ){
+    let shades = [];
+    let allColors = generatePalette(palette).colors;
+    for ( let key in allColors){
+        shades = shades.concat(
+            allColors[key].filter( color => color.id === colorId)
+        );
+    }
+    return shades;
 }
