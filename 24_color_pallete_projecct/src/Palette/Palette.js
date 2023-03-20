@@ -10,12 +10,10 @@ import './Palette.css';
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 function Palette(props){
+    //States
     const [ level, setLevel ] = useState('600');
     const [ colorFormat, setColorFormat ] = useState('hex');
-    // state = {
-    //     level: '600',
-    //     colorFormat: 'hex'
-    // }
+
     const changeChroma = value =>{
         setLevel(levels[value])
     }

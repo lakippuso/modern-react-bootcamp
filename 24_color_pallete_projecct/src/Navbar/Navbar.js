@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 class Navbar extends Component {
     state = {
         open: false
@@ -45,7 +46,7 @@ class Navbar extends Component {
         const { level, colorFormat } = this.props;
         return (
             <div className="Navbar">
-                <div className="Navbar-brand"><span>React Color Picker</span></div>
+                <div className="Navbar-brand"><Link to="/palette">React Color Picker</Link></div>
                 <div className="Navbar-control">
                     <div className="Navbar-slider">
                         
