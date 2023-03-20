@@ -4,7 +4,6 @@ import Palette from './Palette/Palette';
 import PaletteList from './PaletteList/PaletteList';
 
 function App() {
-  // let routes = seedColors.map( (palette, index) => ( <Route path={}/>));
   return (
     <div className="App">
       <Routes>
