@@ -24,7 +24,7 @@ function Palette(props){
     let palette = generatePalette(getPalette(param.paletteId));
     let boxes = palette
     .colors[level].map( 
-        c => (<ColorBox name={c.name} color={c[colorFormat]} />)
+        c => (<ColorBox name={c.name} color={c[colorFormat]} id={c.id} showLink={true}/>)
     );
     return (
         <div className="Palette">

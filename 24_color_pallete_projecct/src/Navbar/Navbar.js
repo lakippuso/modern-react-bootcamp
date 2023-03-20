@@ -9,8 +9,11 @@ import Typography from '@mui/material/Typography';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 class Navbar extends Component {
+    static defaultProps = {
+        showSlider: true
+    }
     state = {
-        open: false
+        open: false,
     };
 
     handleClose = (event, reason) => {
@@ -40,27 +43,27 @@ class Navbar extends Component {
                 this.setState({ open: false});
             }, 1000);
         });
-
     }
     render(){
-        const { level, colorFormat } = this.props;
+        const { level, colorFormat, showSlider } = this.props;
         return (
             <div className="Navbar">
                 <div className="Navbar-brand"><Link to="/palette">React Color Picker</Link></div>
                 <div className="Navbar-control">
-                    <div className="Navbar-slider">
-                        
-                        <Typography id="input-slider" gutterBottom>
-                            Level: {level}
-                        </Typography>
-                        <Slider aria-labelledby="input-slider"
-                                onChange={this.handleChangeChroma} 
-                                defaultValue={5} 
-                                marks
-                                min={1}
-                                max={9}
-                        />
-                    </div>
+                    { showSlider && 
+                        (<div className="Navbar-slider">
+                                <Typography id="input-slider" gutterBottom>
+                                    Level: {level}
+                                </Typography>
+                                <Slider aria-labelledby="input-slider"
+                                        onChange={this.handleChangeChroma} 
+                                        defaultValue={5} 
+                                        marks
+                                        min={1}
+                                        max={9}
+                                />
+                        </div>)
+                    }
                     <div className="Navbar-format">
                         <Select
                         labelId="demo-simple-select-label"

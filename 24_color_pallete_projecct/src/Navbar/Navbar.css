@@ -1,6 +1,7 @@
 .Navbar{
     display: flex;
     padding: 10px;
+    background-color: white;
 }
 .Navbar-brand{
     text-align: center;

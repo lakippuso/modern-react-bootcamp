@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Palette from './Palette/Palette';
 import PaletteList from './PaletteList/PaletteList';
+import SingleColorPalette from './SingleColorPalette/SingleColorPalette';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Route path="palette">
           <Route index element={<PaletteList />}/>
           <Route path=':paletteId' element={<Palette />}/>
-          <Route path=':paletteId/:colorId' element={<h1>Test</h1>}/>
+          <Route path=':paletteId/:colorId' element={<SingleColorPalette />}/>
         </Route>
       </Routes>
     </div>
