@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import seedColors from "../seedColors";
 import generatePalette, { generateScale, levels } from '../colorHelper';
 import ColorBox from "../ColorBox/ColorBox";
@@ -11,24 +11,32 @@ import { useState } from "react";
 export default function SingleColorPalette(props) {
     //States
     const [ colorFormat, setColorFormat ] = useState('hex');
+    const navigate = useNavigate();
 
     const showSlider = false;
 
     const changeFormat = (value) =>{
         setColorFormat(value);
     }
+    const handleGoBack = (evt) =>{
+        return navigate(-1);
+    }
     const style = {
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
         "& .Navbar": {
             marginBottom: '10px',
             "& .Navbar-control": {
                 justifyContent: 'end',
             }
         },
-        "& .SingleColorPalette-colors": {
-            height: '90%',
+        "& .GoBack": {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            "& span": {
+                padding: "10px",
+                backgroundColor: "rgba(0,0,0,0.2)",
+                color: 'white',
+            }
         }
     }
     let { paletteId, colorId } = useParams();
@@ -49,16 +57,25 @@ export default function SingleColorPalette(props) {
             color={c[colorFormat]}
             showLink={false}
         />
-    )
+    );
+    boxes.concat(<div>Hello</div>);
+    console.log();
     return (
-        <Box sx={style} className="SingleColorPalette">
+        <Box sx={style} className="SingleColorPalette Palette">
             <Navbar 
                 showSlider={showSlider} 
                 changeFormat={changeFormat} 
                 colorFormat={colorFormat}
             />
-            <div className="SingleColorPalette-colors">
+            <div className="Palette-colors">
                 {boxes.slice(1)}
+                <div 
+                    className="ColorBox GoBack" 
+                    style={{backgroundColor: 'white'}}
+                    onClick={handleGoBack}
+                >
+                    <span>Go Back</span>
+                </div>
             </div>
             
             <Footer paletteName={palette.paletteName} paletteIcon={palette.emoji}/>

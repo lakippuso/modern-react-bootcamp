@@ -7,6 +7,9 @@
     cursor: pointer;
     text-transform: uppercase;
 }
+.SingleColorPalette .ColorBox{
+    height: 50%;
+}
 .ColorBox-copy button{
     display: inline-block;
     position: absolute;
