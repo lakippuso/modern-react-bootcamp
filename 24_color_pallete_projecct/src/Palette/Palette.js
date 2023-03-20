@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { useState } from 'react';
 import ColorBox from '../ColorBox/ColorBox';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
@@ -23,7 +23,7 @@ function Palette(props){
         setColorFormat(value);
     }
     const param = useParams();
-    let palette = generatePalette(seedColors[param.paletteId]);
+    let palette = generatePalette(getPalette(param.paletteId));
     let boxes = palette
     .colors[level].map( 
         c => (<ColorBox name={c.name} color={c[colorFormat]} />)
@@ -42,5 +42,9 @@ function Palette(props){
         </div>
     );
 }
-
+function getPalette(id) {
+    return seedColors.find( function(palette) {
+        if(palette.id === id) return palette;
+    });
+}
 export default Palette;
