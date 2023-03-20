@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { Link } from 'react-router-dom';
 import './ColorBox.css';
 class ColorBox extends Component {
     state = {
@@ -26,7 +27,7 @@ class ColorBox extends Component {
                         <h1>COPIED!</h1>
                         <p>{color}</p>
                     </div>
-                    <span>More</span>
+                    <Link to={`/palette`} onClick={e => e.stopPropagation()}>More</Link>
                 </div>
             </CopyToClipboard>
         );

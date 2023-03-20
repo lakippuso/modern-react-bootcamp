@@ -10,6 +10,7 @@ function App() {
         <Route path="palette">
           <Route index element={<PaletteList />}/>
           <Route path=':paletteId' element={<Palette />}/>
+          <Route path=':paletteId/:colorId' element={<h1>Test</h1>}/>
         </Route>
       </Routes>
     </div>

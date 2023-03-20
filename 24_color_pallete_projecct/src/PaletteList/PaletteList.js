@@ -12,6 +12,7 @@ class PaletteList extends Component {
             width: '50vw',
             margin: 'auto',
             "& header": {
+                color: 'white',
             },
             "& .Palette-links": {
                 display: 'flex',

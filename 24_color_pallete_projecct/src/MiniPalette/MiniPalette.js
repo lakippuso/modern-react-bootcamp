@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function MiniPalette(props) {
     const styles = {
+        backgroundColor: 'white',
         display: 'flex',
         flexDirection: 'column',
-        border: '1px solid grey',
-        borderRadius: '10px',
+        justifyContent: 'space-between',
+        width: '30%',
         margin: '10px auto',
         padding: '10px',
-        justifyContent: 'space-between',
+        border: '1px solid grey',
+        borderRadius: '10px',
         cursor: 'pointer',
-        width: '30%',
         "& h5": {
             margin: 0,
             fontSize: '1.2rem',
