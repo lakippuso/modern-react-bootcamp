@@ -3,7 +3,6 @@ import chroma from 'chroma-js';
 import React, { useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link, useParams } from 'react-router-dom';
-import './ColorBox.css';
 
 export default function ColorBox(props){
     const changeOnCopy = () =>{
@@ -37,7 +36,6 @@ export default function ColorBox(props){
             backgroundColor: 'rgba(255, 255, 255, 0.3)',
             color: 'white',
         },
-
         "& .ColorBox-copy-overlay": {
             backgroundColor: color,
             width: '100%',

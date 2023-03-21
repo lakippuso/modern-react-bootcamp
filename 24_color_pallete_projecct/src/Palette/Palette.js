@@ -5,7 +5,6 @@ import Navbar from '../Navbar/Navbar';
 import seedColors from '../seedColors';
 import generatePalette from '../colorHelper';
 import { useParams } from 'react-router-dom';
-import './Palette.css';
 import { Box } from '@mui/material';
 
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];

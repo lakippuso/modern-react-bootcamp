@@ -3,11 +3,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
-import './Navbar.css';
 import { Link } from 'react-router-dom';
+
 class Navbar extends Component {
     static defaultProps = {
         showSlider: true
@@ -46,8 +46,31 @@ class Navbar extends Component {
     }
     render(){
         const { level, colorFormat, showSlider } = this.props;
+        const styles = {
+            display: 'flex',
+            padding: '10px',
+            backgroundColor: 'white',
+            '& .Navbar-brand': {
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                alignSelf: 'center',
+                /* color: 'rgba(0, 0, 0, 0.5)', */
+            },
+            '& .Navbar-control': {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%',
+                
+                '& .Navbar-slider': {
+                    display: 'flex',
+                    width: '20rem',
+                }
+            }
+        };
+
         return (
-            <div className="Navbar">
+            <Box className="Navbar" sx={styles}>
                 <div className="Navbar-brand"><Link to="/palette">React Color Picker</Link></div>
                 <div className="Navbar-control">
                     { showSlider && 
@@ -86,7 +109,7 @@ class Navbar extends Component {
                     message={`Format changed to ${colorFormat}`}
                     action={this.action}
                 />
-            </div>
+            </Box>
           );
     }
 }

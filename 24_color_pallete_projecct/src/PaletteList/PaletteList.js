@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import React, {Component} from 'react';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import seedColors from '../seedColors';
-import './PaletteList.css';
 
 class PaletteList extends Component {
     render(){
