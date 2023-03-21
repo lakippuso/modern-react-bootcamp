@@ -22,17 +22,27 @@ export default function SingleColorPalette(props) {
         return navigate(-1);
     }
     const style = {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        overflow: 'hidden',
+        
         "& .Navbar": {
             marginBottom: '10px',
             "& .Navbar-control": {
                 justifyContent: 'end',
             }
         },
-        "& .GoBack": {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }
+        '& .Palette-colors': {
+            height: '90%',
+            display: 'flex', 
+            flexWrap: 'wrap',
+            "& .GoBack": {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }
+        },
     }
     let { paletteId, colorId } = useParams();
     let palette = getPalette( paletteId );
