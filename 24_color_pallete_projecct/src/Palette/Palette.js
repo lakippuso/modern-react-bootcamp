@@ -11,7 +11,7 @@ const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 function Palette(props){
     //States
-    const [ level, setLevel ] = useState('600');
+    const [ level, setLevel ] = useState('500');
     const [ colorFormat, setColorFormat ] = useState('hex');
 
     const changeChroma = value =>{
@@ -24,7 +24,7 @@ function Palette(props){
     let palette = generatePalette(getPalette(param.paletteId));
     let boxes = palette
     .colors[level].map( 
-        c => (<ColorBox name={c.name} color={c[colorFormat]} id={c.id} showLink={true}/>)
+        c => (<ColorBox name={c.name} color={c[colorFormat]} id={c.id} isMultiPalette={true}/>)
     );
     return (
         <div className="Palette">

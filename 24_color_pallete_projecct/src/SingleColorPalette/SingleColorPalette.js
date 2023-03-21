@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import seedColors from "../seedColors";
-import generatePalette, { generateScale, levels } from '../colorHelper';
+import generatePalette from '../colorHelper';
 import ColorBox from "../ColorBox/ColorBox";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -32,11 +32,6 @@ export default function SingleColorPalette(props) {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            "& span": {
-                padding: "10px",
-                backgroundColor: "rgba(0,0,0,0.2)",
-                color: 'white',
-            }
         }
     }
     let { paletteId, colorId } = useParams();
@@ -55,7 +50,7 @@ export default function SingleColorPalette(props) {
             key={i} 
             name={c.name} 
             color={c[colorFormat]}
-            showLink={false}
+            isMultiPalette={false}
         />
     );
     boxes.concat(<div>Hello</div>);
@@ -71,10 +66,9 @@ export default function SingleColorPalette(props) {
                 {boxes.slice(1)}
                 <div 
                     className="ColorBox GoBack" 
-                    style={{backgroundColor: 'white'}}
                     onClick={handleGoBack}
                 >
-                    <span>Go Back</span>
+                    <button>Go Back</button>
                 </div>
             </div>
             
