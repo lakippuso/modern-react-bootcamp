@@ -38,9 +38,30 @@ export default function SingleColorPalette(props) {
             display: 'flex', 
             flexWrap: 'wrap',
             "& .GoBack": {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                width: '20%',
+                height: '50%',
+                margin: '0 auto',
+                display: 'inline-block',
+                position: 'relative',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                backgroundColor: 'black',
+                "& button": {
+                    display: 'inline-block',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    height: '30px',
+                    width: '100px',
+                    marginLeft: '-50px',
+                    marginTop: '-15px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                    border: 'none',
+                    color: 'white',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                    lineHeight: '30px',
+                }
             }
         },
     }
@@ -75,7 +96,7 @@ export default function SingleColorPalette(props) {
             <div className="Palette-colors">
                 {boxes.slice(1)}
                 <div 
-                    className="ColorBox GoBack" 
+                    className="GoBack" 
                     onClick={handleGoBack}
                 >
                     <button>Go Back</button>
