@@ -27,7 +27,7 @@ function App() {
           <Route index element={<PaletteList palette={palettes}/>}/>
           <Route path=':paletteId' element={<Palette getPalette={getPalette}/>}/>
           <Route path=':paletteId/:colorId' element={<SingleColorPalette getPalette={getPalette}/>}/>
-          <Route path='new' element={<NewPaletteForm saveNewPalette={saveNewPalette}/>}/>
+          <Route path='new' element={<NewPaletteForm saveNewPalette={saveNewPalette} palettes={palettes}/>}/>
         </Route>
       </Routes>
     </div>
