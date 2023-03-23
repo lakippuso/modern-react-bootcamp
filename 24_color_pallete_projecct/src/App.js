@@ -5,20 +5,29 @@ import PaletteList from './PaletteList/PaletteList';
 import SingleColorPalette from './SingleColorPalette/SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm/NewPaletteForm';
 import { useState } from 'react';
+import seedColors from './seedColors';
 
 function App() {
-  const [palette, setPalette] = useState();
-  const savePalette = (newPalette) =>{
-    console.log(newPalette)
+  const [palettes, setPalettes] = useState(seedColors);
+  const saveNewPalette = (newPalette) =>{
+    setPalettes([...palettes, newPalette]);
   }
+  
+  const getPalette = (id) => {
+    return palettes.find( function(palette) {
+        if(palette.id === id) return palette;
+    });
+  }
+
   return (
     <div className="App">
       <Routes>
+        <Route index element={<PaletteList />}/>
         <Route path="palette">
-          <Route index element={<PaletteList />}/>
-          <Route path=':paletteId' element={<Palette />}/>
-          <Route path=':paletteId/:colorId' element={<SingleColorPalette />}/>
-          <Route path='new' element={<NewPaletteForm />}/>
+          <Route index element={<PaletteList palette={palettes}/>}/>
+          <Route path=':paletteId' element={<Palette getPalette={getPalette}/>}/>
+          <Route path=':paletteId/:colorId' element={<SingleColorPalette getPalette={getPalette}/>}/>
+          <Route path='new' element={<NewPaletteForm saveNewPalette={saveNewPalette}/>}/>
         </Route>
       </Routes>
     </div>

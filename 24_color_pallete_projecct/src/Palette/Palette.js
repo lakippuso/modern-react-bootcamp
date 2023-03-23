@@ -21,7 +21,8 @@ function Palette(props){
         setColorFormat(value);
     }
     const param = useParams();
-    let palette = generatePalette(getPalette(param.paletteId));
+    let palette = generatePalette(props.getPalette(param.paletteId));
+    
     let boxes = palette
     .colors[level].map( 
         c => (<ColorBox name={c.name} color={c[colorFormat]} id={c.id} isMultiPalette={true}/>)
@@ -53,10 +54,5 @@ function Palette(props){
             <Footer paletteName={palette.paletteName} paletteIcon={palette.emoji}/>
         </Box>
     );
-}
-function getPalette(id) {
-    return seedColors.find( function(palette) {
-        if(palette.id === id) return palette;
-    });
 }
 export default Palette;

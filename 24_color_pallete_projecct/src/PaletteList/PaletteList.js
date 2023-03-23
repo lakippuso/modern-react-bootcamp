@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import MiniPalette from '../MiniPalette/MiniPalette';
-import seedColors from '../seedColors';
 
 class PaletteList extends Component {
     render(){
@@ -29,7 +28,7 @@ class PaletteList extends Component {
                 flexWrap: 'wrap'
             }
         }
-        let minipalettes = seedColors.map( palette => <MiniPalette {...palette} /> )
+        let minipalettes = this.props.palette.map( palette => <MiniPalette {...palette} /> )
         return (
             <Box className="PaletteList" sx={style}>
                 <header><h1>PaletteList</h1> <Link to="/palette/new">Create New Palette</Link></header>

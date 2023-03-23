@@ -66,7 +66,7 @@ export default function SingleColorPalette(props) {
         },
     }
     let { paletteId, colorId } = useParams();
-    let palette = getPalette( paletteId );
+    let palette = props.getPalette( paletteId );
     let newPalette = generateNewPalette(palette, colorId);
 
     // Find color name from paramId
@@ -106,12 +106,6 @@ export default function SingleColorPalette(props) {
             <Footer paletteName={palette.paletteName} paletteIcon={palette.emoji}/>
         </Box>
     );
-}
-//Search Color palette
-function getPalette( paletteId ) {
-    return seedColors.find( function(palette) {
-        if (palette.id === paletteId) return palette;
-    });
 }
 //Generate new Palette
 function generateNewPalette( palette, colorId ){

@@ -15,6 +15,7 @@ import DragableColorBox from '../DragableColorBox/DragableColorBox';
 import { useForm } from "react-hook-form";
 import { MuiColorInput } from 'mui-color-input';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 300;
 
@@ -66,6 +67,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function NewPaletteForm(props) {
     // const theme = useTheme();
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [currentColor, setCurrentColor] = useState('#fff');
     const [colors, setColors] = useState([]);
@@ -87,6 +89,17 @@ export default function NewPaletteForm(props) {
       setNewName(evt.target.value)
     };
 
+    const handleSaveNewPalette = () => {
+      let newPaletteName = "testing Palette name";
+      let newPalette = {
+        paletteName: newPaletteName,
+        id: newPaletteName.toLowerCase().replace(/ /g, '-'),
+        emoji: "emoji",
+        colors: colors,
+      }
+      props.saveNewPalette(newPalette);
+      return navigate('/palette');
+    }
 
     const onSubmit = () =>{
       let isColorUnique = colors.every( (color) => color.color.toLowerCase() !== currentColor.toLowerCase());
@@ -106,7 +119,6 @@ export default function NewPaletteForm(props) {
       setErrorText('');
       setIsFormValid(true);
     };
-
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -124,8 +136,8 @@ export default function NewPaletteForm(props) {
             <Typography variant="h6" noWrap component="div">
               Persistent drawer
             </Typography>
-            <Button color='primary'>Clear Palette</Button>
-            <Button color='primary'>Save Palette</Button>
+            <Button variant="contained" color='primary'>Clear Palette</Button>
+            <Button variant="contained" color='primary' onClick={handleSaveNewPalette}>Save Palette</Button>
           </Toolbar>
         </AppBar>
         <Drawer
