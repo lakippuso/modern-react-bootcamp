@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route index element={<PaletteList />}/>
+        <Route index element={<PaletteList palette={palettes}/>}/>
         <Route path="palette">
           <Route index element={<PaletteList palette={palettes}/>}/>
           <Route path=':paletteId' element={<Palette getPalette={getPalette}/>}/>

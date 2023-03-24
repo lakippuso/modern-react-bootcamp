@@ -11,11 +11,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChromePicker  } from 'react-color';
 import { Button, TextField } from '@mui/material';
-import DragableColorBox from '../DragableColorBox/DragableColorBox';
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import DragableColorList from '../DragableColorList/DragableColorList';
+import { arrayMove } from 'react-sortable-hoc';
 
 const drawerWidth = 300;
 
@@ -68,7 +69,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function NewPaletteForm(props) {
     // const theme = useTheme();
     const navigate = useNavigate();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [open, setOpen] = useState(false);
     const [currentColor, setCurrentColor] = useState('#fff');
     const [colors, setColors] = useState([]);
@@ -76,6 +77,7 @@ export default function NewPaletteForm(props) {
     const [newPaletteName, setNewPaletteName] = useState('');
     const [isColorNameValid, setIsFormValid] = useState(true);
     const [errorText, setErrorText] = useState('');
+    const [isListDragable, setIsListDragable] = useState(false);
 
     ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => props.palettes.every( (palette) => palette.paletteName.toLowerCase() !== value.toLowerCase()) );
 
@@ -121,6 +123,18 @@ export default function NewPaletteForm(props) {
       setErrorText('');
       setIsFormValid(true);
     };
+
+    const deleteDragableBox = (colorId) =>{
+      setColors( colors.filter( color => color.name !== colorId) );
+    }
+
+    const onSortEnd = ({oldIndex, newIndex}) => {
+      setColors(arrayMove(colors, oldIndex, newIndex));
+    };
+
+    const toggleSort = () =>{
+      setIsListDragable( !isListDragable );
+    }
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -150,6 +164,13 @@ export default function NewPaletteForm(props) {
 
                 <Button variant="contained" color='primary' type='submit'>Save Palette</Button>
             </ValidatorForm>
+              <Button 
+                variant="contained" 
+                color='primary' 
+                onClick={toggleSort}
+              >
+                Organize Palette
+              </Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -195,17 +216,13 @@ export default function NewPaletteForm(props) {
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
-          <Box 
-            sx={{
-              display: 'flex',
-              height: '100%',
-              flexWrap: 'wrap',
-            }}
-          >
-            {colors.map( c => <DragableColorBox color={c.color} 
-                                                name={c.name}/>
-            )}
-          </Box>
+          <DragableColorList 
+            colors={colors} 
+            deleteDragableBox={deleteDragableBox}
+            isListDragable={isListDragable}
+            axis='xy'
+            onSortEnd={onSortEnd}
+          />
         </Main>
       </Box>
     );
