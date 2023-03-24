@@ -11,10 +11,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-
-
 const drawerWidth = 300;
-
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -36,7 +33,7 @@ const AppBar = styled(MuiAppBar, {
 export default function NewPaletteFormNav(props) {
 
     ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => props.palettes.every( (palette) => palette.paletteName.toLowerCase() !== value.toLowerCase()) );
-    
+
     const { handleSaveNewPalette, open, handleDrawerOpen } = props;
     const navigate = useNavigate();
     const [newPaletteName, setNewPaletteName] = useState('');
@@ -60,7 +57,7 @@ export default function NewPaletteFormNav(props) {
                   <MenuIcon />
                   </IconButton>
                   <Typography variant="h6" noWrap component="div">
-                  Persistent drawer
+                    Create a Palette
                   </Typography>
                   <ValidatorForm onSubmit={() => handleSaveNewPalette(newPaletteName)} style={{display: 'flex'}}>
                       <TextValidator

@@ -5,15 +5,13 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { ChromePicker  } from 'react-color';
-import { Button, TextField } from '@mui/material';
-import { useForm } from "react-hook-form";
+import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ValidatorForm } from 'react-material-ui-form-validator';
 import DragableColorList from '../DragableColorList/DragableColorList';
 import { arrayMove } from 'react-sortable-hoc';
 import NewPaletteFormNav from '../NewPaletteFormNav/NewPaletteFormNav';
+import ColorPickerForm from '../ColorPickerForm/ColorPickerForm';
 
 const drawerWidth = 300;
 
@@ -50,24 +48,15 @@ export default function NewPaletteForm(props) {
     // const theme = useTheme();
     const { maxBoxCount = 20 } = props;
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm();
     const [open, setOpen] = useState(false);
-    const [currentColor, setCurrentColor] = useState('#fff');
     const [colors, setColors] = useState(props.palettes[0].colors);
-    const [newColorName, setNewColorName] = useState('');
-    const [isColorNameValid, setIsFormValid] = useState(true);
-    const [errorText, setErrorText] = useState('');
     const [isListDragable, setIsListDragable] = useState(false);
 
     const handleDrawerOpen = () => setOpen(true);
   
     const handleDrawerClose = () => setOpen(false);
 
-    const addColors = () => (!errors.colorName) && setColors([...colors, { name: newColorName, color: currentColor }]);
-
-    const handleChangeNewColorName = evt => {
-      setNewColorName(evt.target.value)
-    };
+    const addColors = (newColorName, currentColor) => setColors([...colors, { name: newColorName, color: currentColor }]);
 
     const handleSaveNewPalette = newPaletteName => {
       let newPalette = {
@@ -79,25 +68,6 @@ export default function NewPaletteForm(props) {
       props.saveNewPalette(newPalette);
       return navigate('/palette');
     }
-
-    const onSubmit = () =>{
-      let isColorUnique = colors.every( (color) => color.color.toLowerCase() !== currentColor.toLowerCase());
-      let isColorNameUnique = colors.every( (color) => color.name.toLowerCase() !== newColorName.toLowerCase());
-      
-      if(!isColorUnique) {
-        setErrorText('Color Value must be unique');
-        setIsFormValid(false);
-        return;
-      }
-      if(!isColorNameUnique) {
-        setErrorText('Color Name must be unique');
-        setIsFormValid(false);
-        return;
-      }
-      addColors();
-      setErrorText('');
-      setIsFormValid(true);
-    };
 
     const deleteDragableBox = (colorId) =>{
       setColors( colors.filter( color => color.name !== colorId) );
@@ -119,12 +89,7 @@ export default function NewPaletteForm(props) {
       let randomNumber = Math.floor(Math.random() * allColors.length);
       let newColor = allColors[randomNumber];
 
-      // const isColorUnique= () => colors.every( (color) => color.color.toLowerCase() !== newColor.color.toLowerCase());
-      // const isColorNameUnique = colors.every( (color) => color.name.toLowerCase() !== newColor.name.toLowerCase());
-
-      // while(!(isColorUnique && isColorNameUnique)){
-      // }
-      setColors([...colors, newColor]);
+      addColors(newColor.name, newColor.color);
     }
     
     let isPaletteFull = colors.length >= maxBoxCount;
@@ -136,6 +101,7 @@ export default function NewPaletteForm(props) {
           handleSaveNewPalette={handleSaveNewPalette} 
           open={open} 
           handleDrawerOpen={handleDrawerOpen}
+          maxBoxCount={maxBoxCount}
         />
         <Drawer
           sx={{
@@ -157,33 +123,11 @@ export default function NewPaletteForm(props) {
           </DrawerHeader>
           <Divider />
           <Typography variant='h4'>Create your own Palette</Typography>
-          <ChromePicker color={currentColor} onChangeComplete={ newColor => setCurrentColor(newColor.hex)}/>
-          {/* <MuiColorInput value={currentColor} onChange={setCurrentColor} /> */}
-          <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                error={errors.colorName ? true : false || !isColorNameValid}
-                id="standard-error"
-                label="Color Name"
-                defaultValue=""
-                variant="filled"
-                helperText={errors.colorName ? 'Input Field is required' : errorText}
-                {...register("colorName", { required: true})} 
-                onChange={handleChangeNewColorName}
-              />
-              <Button 
-                variant='contained' 
-                sx={{backgroundColor: currentColor}} 
-                type="submit"
-                disabled={isPaletteFull}
-              >
-                {
-                  isPaletteFull ? 
-                    'Palette Full':
-                    'Add Color'
-                }
-              </Button>
-          </form>
-          
+          <ColorPickerForm 
+            colors={colors}
+            addColors={addColors}
+            isPaletteFull={isPaletteFull}
+            />
           <Button 
             variant="contained" 
             color='primary' 
