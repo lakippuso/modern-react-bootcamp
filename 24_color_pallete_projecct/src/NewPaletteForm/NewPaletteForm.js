@@ -68,11 +68,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function NewPaletteForm(props) {
     // const theme = useTheme();
+    const { maxBoxCount = 20 } = props;
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [open, setOpen] = useState(false);
     const [currentColor, setCurrentColor] = useState('#fff');
-    const [colors, setColors] = useState([]);
+    const [colors, setColors] = useState(props.palettes[0].colors);
     const [newColorName, setNewColorName] = useState('');
     const [newPaletteName, setNewPaletteName] = useState('');
     const [isColorNameValid, setIsFormValid] = useState(true);
@@ -135,6 +136,25 @@ export default function NewPaletteForm(props) {
     const toggleSort = () =>{
       setIsListDragable( !isListDragable );
     }
+    const clearPalette = () =>{
+      setColors([]);
+    }
+
+    const addRandomColor = () =>{
+      let allColors = props.palettes.map(p => p.colors).flat();
+      let randomNumber = Math.floor(Math.random() * allColors.length);
+      let newColor = allColors[randomNumber];
+
+      // const isColorUnique= () => colors.every( (color) => color.color.toLowerCase() !== newColor.color.toLowerCase());
+      // const isColorNameUnique = colors.every( (color) => color.name.toLowerCase() !== newColor.name.toLowerCase());
+
+      // while(!(isColorUnique && isColorNameUnique)){
+      // }
+      setColors([...colors, newColor]);
+    }
+    
+    let isPaletteFull = colors.length >= maxBoxCount;
+
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -166,10 +186,17 @@ export default function NewPaletteForm(props) {
             </ValidatorForm>
               <Button 
                 variant="contained" 
-                color='primary' 
+                color={!isListDragable ? 'primary' : 'success'}
                 onClick={toggleSort}
               >
-                Organize Palette
+                {!isListDragable ? 'Edit Palette' : 'Save Edit'}
+              </Button>
+              <Button 
+                variant="contained" 
+                color='error' 
+                onClick={clearPalette}
+              >
+                Clear Palette
               </Button>
           </Toolbar>
         </AppBar>
@@ -209,10 +236,25 @@ export default function NewPaletteForm(props) {
               <Button 
                 variant='contained' 
                 sx={{backgroundColor: currentColor}} 
-                type="submit">
-                  Add Color
+                type="submit"
+                disabled={isPaletteFull}
+              >
+                {
+                  isPaletteFull ? 
+                    'Palette Full':
+                    'Add Color'
+                }
               </Button>
           </form>
+          
+          <Button 
+            variant="contained" 
+            color='primary' 
+            onClick={addRandomColor}
+            disabled={isPaletteFull}
+          >
+            Add Random Color
+          </Button>
         </Drawer>
         <Main open={open}>
           <DrawerHeader />

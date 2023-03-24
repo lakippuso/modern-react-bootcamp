@@ -4,7 +4,7 @@ import { SortableElement } from 'react-sortable-hoc';
 
 
 const DragableColorBox = SortableElement((props) => {
-    const { name, color, handleDelete } = props;
+    const { name, color } = props;
     const styles = {
         background: color,
         height: '25%',
@@ -18,7 +18,7 @@ const DragableColorBox = SortableElement((props) => {
         "& .box-content": {
             position: 'absolute',
             padding: '5px 10px',
-            bottom: -100,
+            bottom: 0,
             color: 'black',
             fontSize: '.9rem',
             letterSpacing: '1px',
@@ -26,22 +26,12 @@ const DragableColorBox = SortableElement((props) => {
             display: 'flex',
             justifyContent: 'space-between',
             width: '100%',
-            "& svg": {
-                bottom: '-100px',
-                fontSize: '1.2rem',
-                zIndex: 10,
-                opacity: 0,
-            },
-            "&:hover svg": {
-                color: 'white',
-            }
         }
     }
     return(
         <Box className="DragableColorBox" sx={styles} >
             <div className="box-content">
                 <span>{name}</span>
-                <DeleteIcon onClick={handleDelete}/>
             </div>
         </Box>
     );
@@ -62,7 +52,7 @@ const NonDragableColorBox = (props) => {
         "& .box-content": {
             position: 'absolute',
             padding: '5px 10px',
-            bottom: -100,
+            bottom: 0,
             color: 'black',
             fontSize: '.9rem',
             letterSpacing: '1px',
@@ -71,14 +61,13 @@ const NonDragableColorBox = (props) => {
             justifyContent: 'space-between',
             width: '100%',
             "& svg": {
-                bottom: '-100px',
                 fontSize: '1.2rem',
                 zIndex: 10,
                 opacity: 1,
             },
-            "&:hover svg": {
-                color: 'white',
-            }
+        },
+        "&:hover svg": {
+            color: 'white',
         }
     }
     return(

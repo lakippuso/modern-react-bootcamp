@@ -7,7 +7,6 @@ const DragableColorList = SortableContainer(({colors, deleteDragableBox, isListD
     isListDragable ? 
         <DragableColorBox 
             {...color} 
-            key={`item-${color.color}`} 
             index={i} 
             handleDelete={() => deleteDragableBox(color.name)}
             isListDragable={isListDragable}
@@ -15,7 +14,6 @@ const DragableColorList = SortableContainer(({colors, deleteDragableBox, isListD
     :
         <NonDragableColorBox 
             {...color} 
-            key={`item-${color.color}`} 
             index={i} 
             handleDelete={() => deleteDragableBox(color.name)}
             isListDragable={isListDragable}
