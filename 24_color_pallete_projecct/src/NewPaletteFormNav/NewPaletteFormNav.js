@@ -28,6 +28,21 @@ const AppBar = styled(MuiAppBar, {
         duration: theme.transitions.duration.enteringScreen,
       }),
     }),
+    "& .navContent": {
+      display: "flex",
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+    },
+    "& .navControls": {
+      display: "flex",
+      justifyContent: 'row',
+      padding: '10px',
+      '& form' : {
+        display: "flex",
+        justifyContent: 'row',
+      }
+    },
 }));
   
 export default function NewPaletteFormNav(props) {
@@ -56,22 +71,29 @@ export default function NewPaletteFormNav(props) {
                   >
                   <MenuIcon />
                   </IconButton>
-                  <Typography variant="h6" noWrap component="div">
-                    Create a Palette
-                  </Typography>
-                  <ValidatorForm onSubmit={() => handleSaveNewPalette(newPaletteName)} style={{display: 'flex'}}>
-                      <TextValidator
-                        label="Palette Name"
-                        name="newPaletteName"
-                        value={newPaletteName}
-                        onChange={handleChangeNewPaletteName}
-                        validators={['required', 'isPaletteNameUnique']}
-                        errorMessages={['Enter Palette Name', 'Palette Name must be unique']}
-                      />
+                  <Box className="navContent">
+                    <Typography variant="h6" noWrap component="div" className='navTitle'>
+                      Create a Palette
+                    </Typography>
+                    <Box className="navControls">
+                      <ValidatorForm 
+                        onSubmit={() => handleSaveNewPalette(newPaletteName)}
+                        className="validatorForm"
+                      >
+                          <TextValidator
+                            label="Palette Name"
+                            name="newPaletteName"
+                            value={newPaletteName}
+                            onChange={handleChangeNewPaletteName}
+                            validators={['required', 'isPaletteNameUnique']}
+                            errorMessages={['Enter Palette Name', 'Palette Name must be unique']}
+                          />
 
-                    <Button variant="contained" color='primary' type='submit'>Save Palette</Button>
-                    <Button variant="contained" color='secondary' onClick={() => navigate(-1)}>Go Back</Button>
-                  </ValidatorForm>
+                        <Button variant="contained" color='primary' type='submit'>Save Palette</Button>
+                      </ValidatorForm>
+                      <Button variant="contained" color='secondary' onClick={() => navigate(-1)}>Go Back</Button>
+                    </Box>
+                  </Box>
               </Toolbar>
             </AppBar>
         </Box>
