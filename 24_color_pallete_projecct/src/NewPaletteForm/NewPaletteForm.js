@@ -105,12 +105,28 @@ export default function NewPaletteForm(props) {
         />
         <Drawer
           sx={{
+            display: 'flex',
             width: drawerWidth,
             flexShrink: 0,
             '& .MuiDrawer-paper': {
               width: drawerWidth,
               boxSizing: 'border-box',
             },
+            "& .drawerContent": {
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%',
+            },
+            "& .paletteButtons": {
+              display: 'flex',
+              width: '90%',
+              justifyContent:"center",
+              "& button": {
+                fontSize: '.8rem',
+              }
+            }
           }}
           variant="persistent"
           anchor="left"
@@ -122,34 +138,31 @@ export default function NewPaletteForm(props) {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <Typography variant='h4'>Create your own Palette</Typography>
-          <ColorPickerForm 
-            colors={colors}
-            addColors={addColors}
-            isPaletteFull={isPaletteFull}
-            />
-          <Button 
-            variant="contained" 
-            color='primary' 
-            onClick={addRandomColor}
-            disabled={isPaletteFull}
-          >
-            Add Random Color
-          </Button>
-          <Button 
-            variant="contained" 
-            color={!isListDragable ? 'primary' : 'success'}
-            onClick={toggleSort}
-          >
-            {!isListDragable ? 'Edit Palette' : 'Save Edit'}
-          </Button>
-          <Button 
-            variant="contained" 
-            color='error' 
-            onClick={clearPalette}
-          >
-            Clear Palette
-          </Button>
+          <Box className="drawerContent">
+            <Typography variant='h4'>Create your own Palette</Typography>
+            <Box className="paletteButtons">
+              <Button 
+                variant="contained" 
+                color={!isListDragable ? 'primary' : 'success'}
+                onClick={toggleSort}
+              >
+                {!isListDragable ? 'Edit Palette' : 'Save Edit'}
+              </Button>
+              <Button 
+                variant="contained" 
+                color='error' 
+                onClick={clearPalette}
+              >
+                Clear Palette
+              </Button>
+            </Box>
+            <ColorPickerForm 
+              colors={colors}
+              addColors={addColors}
+              isPaletteFull={isPaletteFull}
+              addRandomColor={addRandomColor}
+              />
+          </Box>
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
