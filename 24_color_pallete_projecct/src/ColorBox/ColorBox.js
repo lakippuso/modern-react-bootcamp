@@ -108,12 +108,25 @@ export default function ColorBox(props){
                 width: '100%',
                 textAlign: 'center',
                 marginBottom: '0',
+                
+                [sizeHelper.down('lg')]: {
+                    fontSize: '5rem',
+                },
+                [sizeHelper.down('sm')]: {
+                    fontSize: '3rem',
+                },
             },
 
             "& .ColorBox-copy-message-text": {
                 color: isLighten,
                 fontSize: '2rem',
                 fontWeight: '100',
+                [sizeHelper.down('lg')]: {
+                    fontSize: '1.4rem',
+                },
+                [sizeHelper.down('sm')]: {
+                    fontSize: '1.1rem',
+                },
             },
         },
         ':hover .copy-button': {
@@ -125,15 +138,15 @@ export default function ColorBox(props){
         },
         [sizeHelper.down('lg')]: {
             width: '25%',
-            height: isMultiPalette ? '20%' : "20% ",
+            height: isMultiPalette ? '20%' : "33.3333%",
         },
         [sizeHelper.down('md')]: {
             width: '50%',
-            height: isMultiPalette ? '10%' : "10% ",
+            height: isMultiPalette ? '10%' : "20% ",
         },
         [sizeHelper.down('sm')]: {
             width: '100%',
-            height: isMultiPalette ? '5%' : "10% ",
+            height: isMultiPalette ? '5%' : "10%",
         },
     }
     

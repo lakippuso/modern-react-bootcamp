@@ -4,8 +4,8 @@ import generatePalette from '../colorHelper';
 import ColorBox from "../ColorBox/ColorBox";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-
 import { useState } from "react";
+import sizeHelper from "../sizeHelper";
 
 export default function SingleColorPalette(props) {
     //States
@@ -34,8 +34,7 @@ export default function SingleColorPalette(props) {
         },
         '& .Palette-colors': {
             height: '90%',
-            display: 'flex', 
-            flexWrap: 'wrap',
+            display: 'inline-block', 
             "& .GoBack": {
                 width: '20%',
                 height: '50%',
@@ -60,6 +59,30 @@ export default function SingleColorPalette(props) {
                     cursor: 'pointer',
                     fontSize: '1rem',
                     lineHeight: '30px',
+                }
+            }
+        },
+        [sizeHelper.down('lg')]: {
+            '& .Palette-colors': {
+                "& .GoBack": {
+                    width: '25%',
+                    height: '33.3333%',
+                }
+            }
+        },
+        [sizeHelper.down('md')]: {
+            '& .Palette-colors': {
+                "& .GoBack": {
+                    width: '50%',
+                    height: '20%',
+                }
+            }
+        },
+        [sizeHelper.down('sm')]: {
+            '& .Palette-colors': {
+                "& .GoBack": {
+                    width: '100%',
+                    height: '10%',
                 }
             }
         },
