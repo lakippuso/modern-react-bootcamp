@@ -2,13 +2,14 @@ import { Box } from '@mui/material';
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import MiniPalette from '../MiniPalette/MiniPalette';
+import sizeHelper from '../sizeHelper';
 
 class PaletteList extends Component {
     render(){
         const style = {
             display: 'flex',
             flexDirection: 'column',
-            width: '50vw',
+            width: '50%',
             margin: '0 auto',
             "& header": {
                 display: 'flex',
@@ -26,7 +27,20 @@ class PaletteList extends Component {
                 display: 'flex',
                 flexDirection: 'row',
                 flexWrap: 'wrap'
-            }
+            },
+            
+            [sizeHelper.down('xl')]: {
+                width: '60%',
+            },
+            [sizeHelper.down('lg')]: {
+                width: '70%',
+            },
+            [sizeHelper.down('sm')]: {
+                width: '80%',
+            },
+            [sizeHelper.down('xs')]: {
+                width: '90%',
+            },
         }
         let minipalettes = this.props.palette.map( palette => <MiniPalette {...palette} deletePalette={this.props.deletePalette}/> )
         return (

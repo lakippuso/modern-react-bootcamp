@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
+import sizeHelper from '../sizeHelper';
 
 export default function MiniPalette(props) {
     const styles = {
@@ -49,7 +50,10 @@ export default function MiniPalette(props) {
         },
         "&:hover .deleteIcon": {
             opacity: 1,
-        }
+        },
+        [sizeHelper.down('xs')]: {
+            width: '60%',
+        },
     }
     const miniColors = props.colors.map( c => 
         <Box sx={{
