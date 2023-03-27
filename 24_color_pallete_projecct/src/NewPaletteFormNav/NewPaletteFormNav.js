@@ -10,6 +10,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import PaletteMetaForm from '../PaletteMetaForm/PaletteMetaForm';
 
 const drawerWidth = 300;
 
@@ -38,25 +39,24 @@ const AppBar = styled(MuiAppBar, {
       display: "flex",
       justifyContent: 'row',
       padding: '10px',
-      '& form' : {
-        display: "flex",
-        justifyContent: 'row',
+      '& button' : {
+        marginRight: '10px',
       }
     },
 }));
   
 export default function NewPaletteFormNav(props) {
 
-    ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => props.palettes.every( (palette) => palette.paletteName.toLowerCase() !== value.toLowerCase()) );
-
-    const { handleSaveNewPalette, open, handleDrawerOpen } = props;
+    const { handleSaveNewPalette, open, handleDrawerOpen, palettes } = props;
+    const [ isDialogOpen, setIsDialogOpen ] = useState(false);
     const navigate = useNavigate();
-    const [newPaletteName, setNewPaletteName] = useState('');
 
-    const handleChangeNewPaletteName = evt => {
-      setNewPaletteName(evt.target.value)
-    };
-
+    const handleClickOpenDialog = () => {
+      setIsDialogOpen(true);
+    }
+    const handleClickCloseDialog = () => {
+      setIsDialogOpen(false);
+    }
     return (
         <Box>
             <CssBaseline />
@@ -75,26 +75,21 @@ export default function NewPaletteFormNav(props) {
                     <Typography variant="h6" noWrap component="div" className='navTitle'>
                       Create a Palette
                     </Typography>
-                    <Box className="navControls">
-                      <ValidatorForm 
-                        onSubmit={() => handleSaveNewPalette(newPaletteName)}
-                        className="validatorForm"
-                      >
-                          <TextValidator
-                            label="Palette Name"
-                            name="newPaletteName"
-                            value={newPaletteName}
-                            onChange={handleChangeNewPaletteName}
-                            validators={['required', 'isPaletteNameUnique']}
-                            errorMessages={['Enter Palette Name', 'Palette Name must be unique']}
-                          />
-
-                        <Button variant="contained" color='primary' type='submit'>Save Palette</Button>
-                      </ValidatorForm>
+                    <Box className="navControls">                      
+                      <Button variant="contained" onClick={handleClickOpenDialog}>
+                        Save Palette
+                      </Button>
                       <Button variant="contained" color='secondary' onClick={() => navigate(-1)}>Go Back</Button>
                     </Box>
                   </Box>
               </Toolbar>
+              { isDialogOpen && 
+                    <PaletteMetaForm 
+                      handleSaveNewPalette={handleSaveNewPalette}
+                      palettes={palettes}
+                      handleClickCloseDialog={handleClickCloseDialog}
+                    />
+              }
             </AppBar>
         </Box>
     );

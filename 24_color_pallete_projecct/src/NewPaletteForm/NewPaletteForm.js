@@ -58,11 +58,11 @@ export default function NewPaletteForm(props) {
 
     const addColors = (newColorName, currentColor) => setColors([...colors, { name: newColorName, color: currentColor }]);
 
-    const handleSaveNewPalette = newPaletteName => {
+    const handleSaveNewPalette = (newPaletteName, newPaletteEmoji) => {
       let newPalette = {
         paletteName: newPaletteName,
         id: newPaletteName.toLowerCase().replace(/ /g, '-'),
-        emoji: "emoji",
+        emoji: newPaletteEmoji,
         colors: colors,
       }
       props.saveNewPalette(newPalette);
