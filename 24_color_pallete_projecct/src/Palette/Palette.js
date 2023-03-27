@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ColorBox from '../ColorBox/ColorBox';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
-import seedColors from '../seedColors';
 import generatePalette from '../colorHelper';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';

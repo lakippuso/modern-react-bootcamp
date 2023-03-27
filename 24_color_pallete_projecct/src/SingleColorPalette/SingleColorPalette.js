@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import seedColors from "../seedColors";
 import generatePalette from '../colorHelper';
 import ColorBox from "../ColorBox/ColorBox";
 import Navbar from "../Navbar/Navbar";

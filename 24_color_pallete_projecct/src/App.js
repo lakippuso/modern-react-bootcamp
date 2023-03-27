@@ -13,14 +13,14 @@ function App() {
   
   useEffect(() => {
     syncLocalStorage();
-  }, [palettes]);
+  });
   const saveNewPalette = (newPalette) =>{
     setPalettes([...palettes, newPalette]);
   }
   
   const getPalette = (id) => {
     return palettes.find( function(palette) {
-        if(palette.id === id) return palette;
+        return palette.id === id;
     });
   }
 

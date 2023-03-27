@@ -9,7 +9,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import PaletteMetaForm from '../PaletteMetaForm/PaletteMetaForm';
 
 const drawerWidth = 300;
