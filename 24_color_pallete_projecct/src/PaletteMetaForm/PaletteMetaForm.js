@@ -32,7 +32,7 @@ export default function PaletteMetaForm(props) {
     const savePalette = () => handleSaveNewPalette(newPaletteName, newPaletteEmoji)
     return (
       <div>
-          <Dialog open={stage === 'emoji'}>
+          <Dialog open={stage === 'emoji'} onClose={handleClose}>
             
             <DialogTitle>Choose an Emoji</DialogTitle>
             <Picker data={data} onEmojiSelect={inputEmoji} theme='light'/>

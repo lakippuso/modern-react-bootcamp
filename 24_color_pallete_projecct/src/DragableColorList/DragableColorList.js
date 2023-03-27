@@ -22,7 +22,10 @@ const DragableColorList = SortableContainer(({colors, deleteDragableBox, isListD
     return (
         <Box 
             sx={{
-            height: '100%',
+                height: '100%',
+                overflow: 'hidden',
+                display: 'flex',
+                flexWrap: 'wrap'
             }}
         >
             {items}

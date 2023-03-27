@@ -10,6 +10,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PaletteMetaForm from '../PaletteMetaForm/PaletteMetaForm';
+import sizeHelper from '../sizeHelper';
 
 const drawerWidth = 300;
 
@@ -20,6 +21,20 @@ const AppBar = styled(MuiAppBar, {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    "& .navContent": {
+      display: "flex",
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      [sizeHelper.down('sm')]: {
+        flexDirection: 'row',
+      },
+    },
+    "& .navControls": {
+      '& button' : {
+        marginRight: '10px',
+      }
+    },
     ...(open && {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: `${drawerWidth}px`,
@@ -27,21 +42,12 @@ const AppBar = styled(MuiAppBar, {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
-    }),
-    "& .navContent": {
-      display: "flex",
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      width: '100%',
-    },
-    "& .navControls": {
-      display: "flex",
-      justifyContent: 'row',
-      padding: '10px',
-      '& button' : {
-        marginRight: '10px',
+      [sizeHelper.down('sm')]: {
+        "& .navControls": {
+          display: 'none',
+        },
       }
-    },
+    }),
 }));
   
 export default function NewPaletteFormNav(props) {

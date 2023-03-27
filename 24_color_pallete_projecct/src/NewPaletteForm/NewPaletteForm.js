@@ -108,6 +108,7 @@ export default function NewPaletteForm(props) {
             display: 'flex',
             width: drawerWidth,
             flexShrink: 0,
+            textAlign: 'center',
             '& .MuiDrawer-paper': {
               width: drawerWidth,
               boxSizing: 'border-box',
