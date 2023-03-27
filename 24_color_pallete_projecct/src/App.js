@@ -14,8 +14,13 @@ function App() {
   useEffect(() => {
     syncLocalStorage();
   });
+  
   const saveNewPalette = (newPalette) =>{
     setPalettes([...palettes, newPalette]);
+  }
+  const deletePalette = (id) =>{
+    setPalettes(palettes.filter( palette => palette.id !== id));
+    syncLocalStorage();
   }
   
   const getPalette = (id) => {
@@ -30,13 +35,13 @@ function App() {
       JSON.stringify(palettes),
     )
   }
-
+  const list = <PaletteList palette={palettes} deletePalette={deletePalette}/>;
   return (
     <div className="App">
       <Routes>
-        <Route index element={<PaletteList palette={palettes}/>}/>
+        <Route index element={list}/>
         <Route path="palette">
-          <Route index element={<PaletteList palette={palettes}/>}/>
+          <Route index element={list}/>
           <Route path=':paletteId' element={<Palette getPalette={getPalette}/>}/>
           <Route path=':paletteId/:colorId' element={<SingleColorPalette getPalette={getPalette}/>}/>
           <Route path='new' element={<NewPaletteForm saveNewPalette={saveNewPalette} palettes={palettes}/>}/>

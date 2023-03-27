@@ -9,7 +9,7 @@ class PaletteList extends Component {
             display: 'flex',
             flexDirection: 'column',
             width: '50vw',
-            margin: 'auto',
+            margin: '0 auto',
             "& header": {
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -28,7 +28,7 @@ class PaletteList extends Component {
                 flexWrap: 'wrap'
             }
         }
-        let minipalettes = this.props.palette.map( palette => <MiniPalette {...palette} /> )
+        let minipalettes = this.props.palette.map( palette => <MiniPalette {...palette} deletePalette={this.props.deletePalette}/> )
         return (
             <Box className="PaletteList" sx={style}>
                 <header><h1>PaletteList</h1> <Link to="/palette/new">Create New Palette</Link></header>
