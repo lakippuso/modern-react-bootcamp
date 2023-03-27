@@ -3,6 +3,7 @@ import chroma from 'chroma-js';
 import React, { useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link, useParams } from 'react-router-dom';
+import sizeHelper from '../sizeHelper';
 
 export default function ColorBox(props){
     const changeOnCopy = () =>{
@@ -32,7 +33,9 @@ export default function ColorBox(props){
             position: 'absolute',
             right: 0,
             bottom: 0,
-            padding: '10px',
+            padding: '5px',
+            fontSize: '.6rem',
+            textDecoration: 'none',
             backgroundColor: 'rgba(255, 255, 255, 0.3)',
             color: 'white',
         },
@@ -119,7 +122,19 @@ export default function ColorBox(props){
         },
         "& .see-more":{
             color: isLighten,
-        }
+        },
+        [sizeHelper.down('lg')]: {
+            width: '25%',
+            height: isMultiPalette ? '20%' : "20% ",
+        },
+        [sizeHelper.down('md')]: {
+            width: '50%',
+            height: isMultiPalette ? '10%' : "10% ",
+        },
+        [sizeHelper.down('sm')]: {
+            width: '100%',
+            height: isMultiPalette ? '5%' : "10% ",
+        },
     }
     
     return (
