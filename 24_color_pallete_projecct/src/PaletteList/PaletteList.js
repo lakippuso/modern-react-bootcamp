@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import sizeHelper from '../sizeHelper';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 class PaletteList extends Component {
     render(){
@@ -11,6 +12,10 @@ class PaletteList extends Component {
             flexDirection: 'column',
             width: '50%',
             margin: '0 auto',
+            ".fade-exit-active": {
+                opacity: 0,
+                transition: 'opacity 500ms ease-out',
+            },
             "& header": {
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -42,13 +47,21 @@ class PaletteList extends Component {
                 width: '90%',
             },
         }
-        let minipalettes = this.props.palette.map( palette => <MiniPalette {...palette} deletePalette={this.props.deletePalette}/> )
+        let minipalettes = this.props.palette.map( (palette) => (
+        <CSSTransition
+            key={palette.id}
+            timeout={500}
+            classNames="fade"
+        >
+            <MiniPalette {...palette} deletePalette={this.props.deletePalette}/>
+        </CSSTransition>
+        ))
         return (
             <Box className="PaletteList" sx={style}>
                 <header><h1>PaletteList</h1> <Link to="/palette/new">Create New Palette</Link></header>
-                <div className="Palette-links">
+                <TransitionGroup className="Palette-links">
                     {minipalettes}
-                </div>
+                </TransitionGroup>
             </Box>
           );
     }
