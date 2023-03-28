@@ -1,11 +1,31 @@
-import { Box } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import sizeHelper from '../sizeHelper';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { blue, red } from '@mui/material/colors';
+
 
 class PaletteList extends Component {
+    state = {
+        isDeleteDialogOpen: false,
+        deletingId: '',
+    }
+    openDialog = (id) => {
+        this.setState({ isDeleteDialogOpen: true, deletingId: id })
+    }
+    closeDialog = () => {
+        this.setState({ isDeleteDialogOpen: false, deletingId: '' })
+    }
+    handleDeletePalette = () => {
+        if(this.state.deletingId != '') this.props.deletePalette(this.state.deletingId);
+
+        this.closeDialog();
+    }
     render(){
         const style = {
             display: 'flex',
@@ -53,7 +73,11 @@ class PaletteList extends Component {
             timeout={500}
             classNames="fade"
         >
-            <MiniPalette {...palette} deletePalette={this.props.deletePalette}/>
+            <MiniPalette 
+                {...palette} 
+                deletePalette={this.props.deletePalette}
+                openDialog={this.openDialog}
+            />
         </CSSTransition>
         ))
         return (
@@ -62,6 +86,36 @@ class PaletteList extends Component {
                 <TransitionGroup className="Palette-links">
                     {minipalettes}
                 </TransitionGroup>
+                <Dialog open={this.state.isDeleteDialogOpen} aria-labelledby="delete-dialog">
+                    <DialogTitle id="delete-dialog">Delete Palette?</DialogTitle>
+                    
+                    <List sx={{ pt: 0 }}>
+                        <ListItem disableGutters>
+                            <ListItemButton onClick={this.handleDeletePalette}>
+                            <ListItemAvatar>
+                                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                                    <DeleteIcon />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={'Delete'} />
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem disableGutters>
+                            <ListItemButton
+                                autoFocus
+                                onClick={this.closeDialog}
+                            >
+                                <ListItemAvatar>
+                                <Avatar sx={{ bgcolor: red[100], color: red[600] }}>
+                                    <CancelIcon />
+                                </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="Cancel" />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                </Dialog>
             </Box>
           );
     }

@@ -65,13 +65,14 @@ export default function MiniPalette(props) {
     );
     
     const navigate = useNavigate();
-    const goToPalette = evt =>{
+    const goToPalette = () =>{
         navigate(`/palette/${props.id}`);
     }
 
     const handleDelete = evt => {
-        evt.stopPropagation()
-        props.deletePalette(props.id);
+        evt.stopPropagation();
+        props.openDialog(props.id)
+        // props.deletePalette(props.id);
     }
 
     return(
