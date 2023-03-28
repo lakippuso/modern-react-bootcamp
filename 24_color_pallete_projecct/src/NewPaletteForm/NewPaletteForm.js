@@ -88,7 +88,10 @@ export default function NewPaletteForm(props) {
       let allColors = props.palettes.map(p => p.colors).flat();
       let randomNumber = Math.floor(Math.random() * allColors.length);
       let newColor = allColors[randomNumber];
-
+      while(colors.some( color => color.name === newColor.name)){
+        randomNumber = Math.floor(Math.random() * allColors.length);
+        newColor = allColors[randomNumber];
+      }
       addColors(newColor.name, newColor.color);
     }
     
