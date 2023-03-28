@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import sizeHelper from '../sizeHelper';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Dialog, DialogTitle } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { blue, red } from '@mui/material/colors';
